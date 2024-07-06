@@ -90,13 +90,13 @@ def train(args):
 
     print('===> Loading datasets')
     # train_set = get_patch_training_set(opt.n_scale, opt.patch_size)
-    train_set = TrainsetFromFolder(args.dataset_name, "../3DT-Net/CAVE/train/", args.n_scale,
+    train_set = TrainsetFromFolder(args.dataset_name, "./CAVE/train/", args.n_scale,
                                    patchSize=args.patch_size, crop_num=16)
     result_path = './results/' + args.dataset_name + '_x' + str(args.n_scale) + '/' + str(args.model_title) +'/'
     # if use_dist:
     #     sampler = DistributedSampler(train_set)
 
-    test_set = ValsetFromFolder(args.dataset_name, "../3DT-Net/CAVE/test/", args.n_scale, 'Bicubic')
+    test_set = ValsetFromFolder(args.dataset_name, "./CAVE/test/", args.n_scale, 'Bicubic')
 
     training_data_loader = DataLoader(dataset=train_set, num_workers=8, batch_size=args.batch_size,
                                       shuffle=True, pin_memory=True)
