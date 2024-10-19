@@ -57,10 +57,8 @@ class Net(nn.Module):
 
         # self.conv_delasta = nn.Conv2d(dim, inp_channels, 3, 1, 1)  # reconstruction from features
         self.skip_conv = default_conv(inp_channels, dim, 3)
-        self.upsample = Upsampler(default_conv, scale, dim)
         self.tail = default_conv(dim*3, inp_channels, 3)
         self.conv = default_conv(2 * dim,dim,1)
-        self.high1 = Updownblock()
         self.bicubicsample = torch.nn.Upsample(scale_factor=scale, mode='bicubic', align_corners=False)
         self.dw = nn.Conv2d(dim, dim, kernel_size=3, stride=1, padding=1)
         self.sc = default_conv(dim, dim, 3)
