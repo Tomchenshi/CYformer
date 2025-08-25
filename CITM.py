@@ -93,14 +93,14 @@ class SSMA(nn.Module):
             nn.GELU()
         )
 
-        self.SAAI = nn.Sequential(
+        self.SEAI = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
             nn.Conv2d(dim, dim // 8, kernel_size=1),
             nn.BatchNorm2d(dim // 8),
             nn.GELU(),
             nn.Conv2d(dim // 8, dim, kernel_size=1),
         )
-        self.SEAI = nn.Sequential(
+        self.SAAI = nn.Sequential(
             nn.Conv2d(dim, dim // 18, kernel_size=1),
             nn.BatchNorm2d(dim // 18),
             nn.GELU(),
@@ -379,5 +379,6 @@ class SpatialGate(nn.Module):
         x2 = self.pconv(self.conv(self.norm(x2).transpose(1, 2).contiguous().view(B, C//2, H, W))).flatten(2).transpose(-1, -2).contiguous()
 
         return x1 * x2
+
 
 
